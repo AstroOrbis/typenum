@@ -68,6 +68,16 @@
 
 use core::cmp::Ordering;
 
+#![cfg(target_os = "windows")]
+mod generated {
+    include!(concat!(env!("OUT_DIR"), "\\op.rs"));
+    include!(concat!(env!("OUT_DIR"), "\\consts.rs"));
+
+    #[cfg(feature = "const-generics")]
+    include!(concat!(env!("OUT_DIR"), "\\generic_const_mappings.rs"));
+}
+
+#![cfg(not(target_os = "windows"))]
 mod generated {
     include!(concat!(env!("OUT_DIR"), "/op.rs"));
     include!(concat!(env!("OUT_DIR"), "/consts.rs"));
